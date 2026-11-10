@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Attendance | DGE</title>
+  <style>
+    /* Colours from the official DGE 2025 brand booklet (measured from its pages):
+       https://www.dge.gov.ae/-/media/sites/dge/branding/2025-dge-brand-identity-booklet_enar.ashx */
+    :root {
+      --reliable-blue: #1a4370;
+      --light-blue: #95b0cc;
+      --qr: min(56vh, 34vw); /* QR size: as big as the screen allows */
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      min-height: 100vh;
+      padding: 4vh 5vw;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 3vh;
+      background: var(--reliable-blue);
+      color: #fff;
+      /* DGE brand typeface. Falls back to Helvetica / Arial where it is not installed. */
+      font-family: "DIN Next LT Arabic", "DIN Next LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    header, footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 0 solid var(--light-blue);
+      font-size: clamp(14px, 1.2vw, 22px);
+    }
+    header { border-bottom-width: 1px; padding-bottom: 1.5vh; }
+    footer { border-top-width: 1px; padding-top: 2vh; }
+    footer img { height: clamp(40px, 6vh, 88px); }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 4vw;
+    }
+    h1 { margin: 0 0 0.5em; font-weight: 300; font-size: clamp(28px, 3.4vw, 72px); line-height: 1.15; }
+    p { margin: 0; font-size: clamp(16px, 1.4vw, 28px); }
+    h1, p { text-wrap: balance; } /* even line lengths, no single word left alone */
+
+    /* The white border around the QR is needed: phones cannot read the code without it. */
+    .qr {
+      justify-self: center;
+      width: var(--qr);
+      padding: calc(var(--qr) * 0.11);
+      background: #fff;
+    }
+    .qr img { display: block; width: 100%; }
+
+    /* Phones and portrait screens: stack everything */
+    @media (orientation: portrait) {
+      :root { --qr: min(70vw, 45vh); }
+      main { grid-template-columns: 1fr; gap: 4vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span>Attendance</span>
+    <span lang="ar" dir="rtl">الحضور</span>
+  </header>
+
+  <main>
+    <div>
+      <h1>Scan to register your attendance.</h1>
+      <p>Point your phone camera at the code.</p>
+    </div>
+
+    <!-- To show a new QR code: replace qr.png with the new picture, using the same name. -->
+    <div class="qr"><img src="qr.png" alt="QR code to register your attendance"></div>
+
+    <div lang="ar" dir="rtl">
+      <h1>امسح الرمز لتسجيل حضورك.</h1>
+      <p>وجّه كاميرا هاتفك نحو الرمز.</p>
+    </div>
+  </main>
+
+  <footer>
+    <span>dge.gov.ae</span>
+    <!-- DGE brandmark (white version), copied from dge-ga-web-app/public/images/dge-logo-dark.svg -->
+    <img src="dge-logo-white.svg" alt="Department of Government Enablement">
+  </footer>
+</body>
+</html>
